@@ -2,8 +2,10 @@
 #include <TimeLib.h>
 
 /*
- * created by Chris Euler (seldon on RC)
+ * created by seldon on RC
  * 
+ * Automated Salt Water Mixing Station
+ *
  * 55 Gallon Drum Level Monitoring Using Ultrasonic Sensor HC-SR04
  *
  * control using 8 relay module
@@ -11,11 +13,11 @@
  
 
 //IO Pins
-const int PressureSwitchPin = 3;  // Pressure - ?? Jumper
-const int trigPin 	= 4;    	    // Trig - Purple Jumper
-const int echoPin 	= 5;    	    // Echo - Grey Jumper
-const int Relay1Pin = 6;      	  // Not in use
-const int Relay2Pin = 7;      	  // Not in use
+const int PressureSwitchPin = 3;    // Pressure - ?? Jumper
+const int trigPin   = 4;    	    // Trig - Purple Jumper
+const int echoPin   = 5;    	    // Echo - Grey Jumper
+const int Relay1Pin = 6;      	    // Not in use
+const int Relay2Pin = 7;      	    // Not in use
 const int Relay3Pin = 8;    	    // Not in use
 const int Relay4Pin = 9;    	    // Not in use
 const int Relay5Pin = 10;   	    // Blue
@@ -29,10 +31,10 @@ int TankSolenoidPin;
 int BoosterPumpPin;
 
 
-int duration;					  // Duration between trig and echo
-int mm;						      // Calculated distance in mm based on the speed of sound
+int duration;		// Duration between trig and echo
+int mm;			// Calculated distance in mm based on the speed of sound
 int TankHeight = 850;	// Height of the tank in mm from the bottom to the sensor
-int TankLevel = 0;			// Calculated height of the water in the tank
+int TankLevel = 0;	// Calculated height of the water in the tank
 
 time_t initialtime = 0;
 time_t currenttime = 0;
@@ -219,7 +221,7 @@ long TankStatusRead(){
   return level;
 }
 
-int RODIOff(){			// May need to put something to break this once it is done or just do away with the while loop and make it an if loop otherwise the program will be stuck in the while loop and never check anything else
+int RODIOff(){			
   while(RODI == Off)
   {
     digitalWrite(FeedSolenoidPin, HIGH);
