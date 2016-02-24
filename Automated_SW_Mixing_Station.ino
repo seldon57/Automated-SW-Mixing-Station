@@ -45,12 +45,15 @@ int RunTime = 3600;
 
 boolean PressureSwitch = false;	// bit to determine if the pressure switch is on
 
+//Tank Levels
 int TankLevelStatus = 0;
 enum TankStatus {
   HighHigh, High, Normal, Low, LowLow
 };
 TankStatus level=HighHigh;
 
+
+//Rodi System Status
 int RODIRunningStatus = 0;
 enum RODIStatus {
   Off, InitialFlush, Flushing, Running
