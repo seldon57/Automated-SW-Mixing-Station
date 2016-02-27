@@ -14,8 +14,8 @@
 
 //IO Pins
 const int PressureSwitchPin = 3;    // Pressure - ?? Jumper
-const int trigPin   = 4;            // Trig - Purple Jumper
-const int echoPin   = 5;    	    // Echo - Grey Jumper
+const int Sens1_trigPin   = 4;      // Trig - Purple Jumper
+const int Sens1_echoPin   = 5;      // Echo - Grey Jumper
 const int Relay1Pin = 6;      	    // Not in use
 const int Relay2Pin = 7;      	    // Not in use
 const int Relay3Pin = 8;    	    // Not in use
@@ -31,7 +31,6 @@ int TankSolenoidPin;
 int BoosterPumpPin;
 
 
-int duration;			// Duration between trig and echo
 int mm;				// Calculated distance in mm based on the speed of sound
 
 // Define the number of samples to keep track of.  The higher the number,
@@ -187,24 +186,8 @@ int PressureSwitchRead(){
   return PressureSwitch;
 }
 
-long TankStatusRead(){
+int TankStatusRead(){
 
-  // The sensor is triggered by a HIGH pulse of 10 or more microseconds.
-  // Give a short LOW pulse beforehand to ensure a clean HIGH pulse:
-  digitalWrite(trigPin, LOW);
-  delayMicroseconds(5);
-  digitalWrite(trigPin, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trigPin, LOW);
- 
-  // Read the signal from the sensor: a HIGH pulse whose
-  // duration is the time (in microseconds) from the sending
-  // of the ping to the reception of its echo off of an object.
-  duration = pulseIn(echoPin, HIGH);
- 
-  // convert the time into a distance
-  mm = (duration/2) / 2.91;
-  
   //Calculate the water level in the tank
   TankLevel = TankHeight - mm;
   
@@ -347,7 +330,7 @@ int Smoothing(){
   // subtract the last reading:
   sensor_total = sensor_total - readings[readIndex];
   // read from the sensor:
-  readings[readIndex] = HCSR04Read(); // this should be the TankHeight reading rather than a raw analog input
+  readings[readIndex] = HCSR04Read(Sens1_trigPin, Sens1_echoPin); // this should be the TankHeight reading rather than a raw analog input
   // add the reading to the total:
   sensor_total = sensor_total + readings[readIndex];
   // advance to the next position in the array:
@@ -365,8 +348,10 @@ int Smoothing(){
   return sensor_average;
 }
 
-int HCSR04Read(){
+int HCSR04Read(int trigPin, int echoPin){
 
+  int duration;		// Duration between trig and echo
+  int distance;		// Distance measured by the sensor in mm
   // The sensor is triggered by a HIGH pulse of 10 or more microseconds.
   // Give a short LOW pulse beforehand to ensure a clean HIGH pulse:
   digitalWrite(trigPin, LOW);
@@ -381,7 +366,7 @@ int HCSR04Read(){
   duration = pulseIn(echoPin, HIGH);
  
   // convert the time into a distance
-  mm = (duration/2.00) / 2.91;
+  distance = (duration/2.00) / 2.91;
     
-  return mm;
+  return distance;
 }
