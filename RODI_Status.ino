@@ -1,4 +1,14 @@
 
+/*
+ * created by seldon on RC
+ * 
+ * Automated Salt Water Mixing Station
+ *
+ * 55 Gallon Drum Level Monitoring Using Ultrasonic Sensor HC-SR04
+ *
+ * control using 8 relay module
+ */
+
 ////////////////////////////////////////////////////////////////
 //  Action to take dependent on the RODI system status
 ////////////////////////////////////////////////////////////////
