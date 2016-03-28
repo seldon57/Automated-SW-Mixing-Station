@@ -1,7 +1,22 @@
+
+/*
+ * created by seldon on RC
+ * 
+ * Automated Salt Water Mixing Station
+ *
+ * 55 Gallon Drum Level Monitoring Using Ultrasonic Sensor HC-SR04
+ *
+ * control using 8 relay module
+ */
+
+////////////////////////////////////////////////////////////////
+//  Read from the HC-SR04 and average over 5 readings
+////////////////////////////////////////////////////////////////
+
 int HCSR04Read(int trigPin, int echoPin){
   int i;
-  int avg = 0;
-  int mm;		    // Distance measured by the sensor in mm
+  int avg = 0;		// Initialize average to 0
+  int mm;		// Distance measured by the sensor in mm
   int duration;		// Duration between trig and echo
 
   for (i = 0; i < 5; i++){
