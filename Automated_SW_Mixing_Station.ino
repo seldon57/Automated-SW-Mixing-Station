@@ -1,5 +1,3 @@
-#include <Time.h>
-#include <TimeLib.h>
 
 /*
  * created by seldon on RC
@@ -11,6 +9,8 @@
  * control using 8 relay module
  */
  
+#include <Time.h>
+#include <TimeLib.h>
 
 //IO Pins
 const int PressureSwitchPin = 3;    // Pressure - ?? Jumper
